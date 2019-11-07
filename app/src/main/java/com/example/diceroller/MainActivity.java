@@ -1,5 +1,6 @@
 package com.example.diceroller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -8,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,8 +18,22 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+
     int scoreCount;
     TextView scoreView;
+
+    final String[] questions = {
+
+            "If you could go anywhere in the world, where would you go?",
+           " If you were stranded on a desert island, what three things would you want to take with you?",
+           " If you could eat only one food for the rest of your life, what would that be?",
+    " If you won a million dollars, what is the first thing you would buy?",
+   " If you could spaned the day with one fictional character, who would it be?",
+   " If you found a magic lantern and a genie gave you three wishes, what would you wish?"
+
+};
+
+    TextView DisplayQuestions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         scoreView = (TextView) findViewById(R.id.score);
         scoreView.setText("Score: " + scoreCount);
 
+        DisplayQuestions = findViewById(R.id.DisplayQuestions);
+
        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void buttonOnClick(View v){
+
+        Button button3=(Button) v;
+        startActivity(new Intent(getApplicationContext(),Activity2.class));
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,6 +137,11 @@ public void compare(int y, int z)
     {
         scoreCount++;
         scoreView.setText("Score: " + scoreCount);
+    }
+
+    public void Button2(View view){
+        Random z = new Random();
+        DisplayQuestions.setText(questions[z.nextInt(questions.length)]);
     }
 
 }
